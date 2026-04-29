@@ -173,7 +173,7 @@ const COMMON_CONTAMINANTS: Contaminant[] = [
 // Filter recommendations
 // ---------------------------------------------------------------------------
 
-const FILTER_OPTIONS: FilterRecommendation[] = [
+const FILTER_OPTIONS: z.infer<typeof FilterRecommendation>[] = [
   {
     type: "Reverse Osmosis (Under-sink)",
     removes: ["Lead", "PFAS", "Arsenic", "Nitrate", "THMs", "Most contaminants"],
@@ -245,7 +245,7 @@ export async function getWaterQuality(input: WaterQualityInput): Promise<WaterQu
   };
 }
 
-function getFilterRecs(contaminants: Contaminant[]): FilterRecommendation[] {
+function getFilterRecs(contaminants: Contaminant[]): z.infer<typeof FilterRecommendation>[] {
   const hasPFAS = contaminants.some((c) => c.category === "pfas" && c.exceedsHealthGuideline);
   const hasLead = contaminants.some((c) => c.name === "Lead" && c.exceedsHealthGuideline);
 

@@ -63,7 +63,7 @@ export type WeatherAlertInput = z.infer<typeof WeatherAlertInput>;
 
 export const EmergencyKit = z.object({
   category: z.string(),
-  items: z.array(z.object({ item: z.string(), quantity: z.string(); essential: z.boolean() })),
+  items: z.array(z.object({ item: z.string(), quantity: z.string(), essential: z.boolean() })),
 });
 
 export const WeatherAlertResult = z.object({
@@ -127,7 +127,7 @@ const SAFETY_ACTIONS: Record<string, string[]> = {
   ],
 };
 
-const EMERGENCY_KIT: EmergencyKit[] = [
+const EMERGENCY_KIT: z.infer<typeof EmergencyKit>[] = [
   {
     category: "Water & Food",
     items: [
@@ -229,6 +229,6 @@ export function getSafetyActions(eventType: z.infer<typeof WeatherEventType>): s
 /**
  * Get the emergency preparedness kit checklist.
  */
-export function getEmergencyKit(): EmergencyKit[] {
+export function getEmergencyKit(): z.infer<typeof EmergencyKit>[] {
   return EMERGENCY_KIT;
 }
